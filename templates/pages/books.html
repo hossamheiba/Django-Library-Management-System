@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div style="direction: rtl;" class="wrapper">
+      <div class="content-wrapper p-5">
+                <div class="row mb-2">
+                  <div class="col-sm-6">
+                    <h1>الكتب</h1>
+                  </div>
+                </div>
+            </section>
+            <!-- Main content -->
+            <section class="content">                  
+              <!-- Default box -->
+              <div class="card card-solid">
+                <div class="card-body pb-0">
+                  <div class="row d-flex align-items-stretch">
+                    <!-- بداية الكتاب -->
+                    {% for lm in lms %}
+                    <div   class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch ">
+                      <div  id="" class="card bg-light">
+                        <div  class="card-header text-muted border-bottom-0">
+                          {{lm.cateogry}}
+                        </div>
+                        <div class="card-body pt-0">
+                          <div class="row">
+                            <div class="col-7">
+                              <h2 class="lead"><b>{{lm.title_book}}</b></h2>
+                              <ul class="  fa-ul text-muted">
+                                
+                                {% if lm.status == "متاح" %}
+                                <li class="small text-success"><span class="fa-li"></span>{{lm.status}}</li>
+
+                                {% elif lm.status == "تأجير" %}
+                                <li class="small text-warning"><span class="fa-li"></span>{{lm.status}}</li>
+
+                                {% else %}
+                                <li class="small text-danger"><span class="fa-li"></span>{{lm.status}}</li>
+
+                                {% endif %}
+
+
+                                {% if lm.status == "متاح" %}
+                                <li class="small"><span class="fa-li"></span>السعر: {{lm.price}}</li>
+
+                                {% elif lm.status == "تأجير" %}
+                                <li class="small"><span class="fa-li"></span>السعر في اليوم: {{lm.retal_price_day}}</li>
+                                
+                                {% else %}
+                                <li style="text-decoration-line: line-through ;" class="small"><span class="fa-li"></span>السعر: 0</li>
+
+                                {% endif %}
+                                
+                              </ul>
+                            </div>
+                            <div class="col-5 text-center">
+                                <img style="height: 120px; width: 120px;"  src="{{lm.image_author.url}}" alt="" class="img-circle img-fluid">
+                              </div>
+                          </div>
+                        </div>
+                        <div class="card-footer">
+                          <div class="text-right">
+
+                            <a href="{% url 'lms:delete' lm.id %}" class="btn btn-sm bg-danger">
+                              <i class="fas fa-trash"></i>
+                            </a>
+
+                            <a href="{% url 'lms:update' lm.id %}" class="btn btn-sm btn-primary">
+                              <i class="fas fa-book"></i> تعديل
+                            </a>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                     {% endfor %}
+
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+      </div>
+    </div>
+  
+
+
+{% endblock body %}

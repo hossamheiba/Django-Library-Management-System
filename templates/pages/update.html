@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load bootstrap5 %}
+{% block body %}
+
+<div style="direction: rtl" class="wrapper">
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title">تعديل الكتاب</h3>
+      </div>
+      <!-- /.card-header -->
+      <!-- form start -->
+      <form method="POST" enctype="multipart/form-data">
+        <div class="card-body">
+          {% csrf_token %}
+          {% bootstrap_form update_book %}
+        </div>
+
+        <div class="card-footer">
+          {% buttons %}
+          <div class="card-footer">
+            <button type="submit" class="btn btn-primary">حفظ</button>
+          </div>
+          {% endbuttons %}
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock body %}
